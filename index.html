@@ -1,16 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html lang="en-US">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="style.css">
-   <script src="http://code.jquery.com/jquery-3.4.0.js"></script>
-  <script type="text/javascript" src='script.js' defer>
-  </script>
-  <title>My game</title>
+  <title>Игра жизнь</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
 </head>
-<body onload="begin()">
-  <canvas id="canvas" width="500" height="500"></canvas>
+
+<body>
+  <div id='main'>
+    <canvas id="c1" width="1280" height="720"></canvas>
+    <!-- <canvas id="c2" width="1200" height="720"></canvas> -->
+
+    <div id='menu'>
+      <p>Количество циклов: <span id="count">0</span></p>
+      <button id="start">Start</button>
+      <button id="stop">Stop</button>
+      <button id="rand">Rand</button>
+      <button id="res">Reset</button>
+      <button id="randColor">RandColor</button>
+      <input type="range" id='range' oninput="reset()"></input>
+      <p id='p'> </p>
+    </div>
+  </div>
 </body>
+
 </html>
