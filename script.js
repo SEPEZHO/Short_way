@@ -4,8 +4,8 @@ var mas = [];
 var mas2 = [];
 var count = 0;
 var timer;
-var width = 1280;
-var height = 720;
+var width = 300;
+var height = 300;
 var fps = document.getElementById('range');
 var xxx2 = 0;
 var yyy2 = 0;
@@ -59,18 +59,18 @@ function goLife() {
 }
 goLife();
 
-function stroke() {
-  for (var x = 0.5; x <= width; x += 10) {
-    ctx.moveTo(x, 0);
-    ctx.lineTo(x, width);
-  }
-  for (var y = 0.5; y <= width; y += 10) {
-    ctx.moveTo(0, y);
-    ctx.lineTo(width, y);
-  }
-  ctx.strokeStyle = 'black';
-  ctx.stroke();
-}
+// function stroke() {
+//   for (var x = 0.5; x <= width; x += 10) {
+//     ctx.moveTo(x, 0);
+//     ctx.lineTo(x, width);
+//   }
+//   for (var y = 0.5; y <= width; y += 10) {
+//     ctx.moveTo(0, y);
+//     ctx.lineTo(width, y);
+//   }
+//   ctx.strokeStyle = 'black';
+//   ctx.stroke();
+// }
 
 // document.getElementById('randColor').onclick = function ColorR(){
 //   var r = Math.floor(Math.random() * (256)),
@@ -82,8 +82,8 @@ function stroke() {
 
 function drawField() {
   //ctx.clearRect(0, 0, width, height);
-  for (var i = 0; i < width; i++) {
-    for (var j = 0; j < height; j++) {
+  for (var i = 0; i < width / 10; i++) {
+    for (var j = 0; j < height / 10; j++) {
       if (mas[i][j] == 1) {
         ctx.fillStyle = 'lime';
         ctx.fillRect(j * 10, i * 10, 9.9, 9.9);
@@ -95,18 +95,21 @@ function drawField() {
         ctx.fillRect(j * 10, i * 10, 9.9, 9.9);
 
       }
+      else if (mas2[i][j] == 3) {
+        ctx.fillStyle = 'rgb(255, 128, 0)';
+        ctx.fillRect(j * 10, i * 10, 9.9, 9.9);
+
+      }
     }
   }
-  stroke();
+  // stroke();
 }
-stroke();
+// stroke();
 
 function startLife() {
-  var mas2 = [];
-
-  for (var i = 0; i < width; i++) {
+  for (var i = 0; i < width / 10; i++) {
     mas2[i] = [];
-    for (var j = 0; j < height; j++) {
+    for (var j = 0; j < height / 10; j++) {
       if (mas[i][j] == 2) {
         var x2 = xxx2;
         var y2 = yyy2;
@@ -120,97 +123,109 @@ function startLife() {
       var a = x2 - x3;
       var b = y2 - y3;
       var c = Math.sqrt(a * a + b * b);
-
-      // if (mas[i - 1][j] == 0) {
-      //   var xx = xxx2 - 1;
-      //   var yy = yyy2;
-      //   var aa = xx - x3;
-      //   var bb = yy - y3;
-      //   var c1 = Math.sqrt(aa * aa + bb * bb);
-      // }
-      // if (mas[i + 1][j] == 0) {
-      //   var xx1 = xxx2 + 1;
-      //   var yy1 = yyy2;
-      //   var aa1 = xx1 - x3;
-      //   var bb1 = yy1 - y3;
-      //   var c2 = Math.sqrt(aa1 * aa1 + bb1 * bb1);
-      // }
-      // if (mas[i][j + 1] == 0) {
-      //   var xx2 = xxx2;
-      //   var yy2 = yyy2 + 1;
-      //   var aa2 = xx2 - x3;
-      //   var bb2 = yy2 - y3;
-      //   var c3 = Math.sqrt(aa2 * aa2 + bb2 * bb2);
-      // }
-      // if (mas[i][j - 1] == 0) {
-      //   var xx3 = xxx2;
-      //   var yy3 = yyy2 - 1;
-      //   var aa3 = xx3 - x3;
-      //   var bb3 = yy3 - y3;
-      //   var c4 = Math.sqrt(aa3 * aa3 + bb3 * bb3);
-      // }
-      // console.log(c, c1, c2, c3, c4);
-      // var n = 3;
-      // var m = Math.pow(10, n);
-      // c = Math.round(c * m) / m;
-      console.log(c);
-      console.log('sdasd');
-      var neighbors = 0;
-      // if mas[i - 1][j]
-      // if mas[i + 1][j]
-      // if mas[i][j + 1]
-      // if mas[i][j - 1]
+      if (mas[fpm(i) - 1][j] != 3) {
+        var xx = xxx2 - 1;
+        var yy = yyy2;
+        var aa = xx - x3;
+        var bb = yy - y3;
+        var c1 = Math.sqrt(aa * aa + bb * bb);
+      }
+      if (mas[fpp(i) + 1][j] != 3) {
+        var xx1 = xxx2 + 1;
+        var yy1 = yyy2;
+        var aa1 = xx1 - x3;
+        var bb1 = yy1 - y3;
+        var c2 = Math.sqrt(aa1 * aa1 + bb1 * bb1);
+      }
+      if (mas[i][fpp(j) + 1] != 3) {
+        var xx2 = xxx2;
+        var yy2 = yyy2 + 1;
+        var aa2 = xx2 - x3;
+        var bb2 = yy2 - y3;
+        var c3 = Math.sqrt(aa2 * aa2 + bb2 * bb2);
+      }
+      if (mas[i][fpm(j) - 1] != 3) {
+        var xx3 = xxx2;
+        var yy3 = yyy2 - 1;
+        var aa3 = xx3 - x3;
+        var bb3 = yy3 - y3;
+        var c4 = Math.sqrt(aa3 * aa3 + bb3 * bb3);
+      }
+      var min = Math.min(c, c1, c2, c3, c4);
+      if (min == c1) {
+        mas2[i][j] == 3;
+      drawField();
     }
-  }
-  // mas = mas2;
-  drawField();
-  // reset()
-}
-function reset() {
-  count++;
-  document.getElementById('count').innerHTML = count;
-  var speed = range.value;
-  var fps = document.getElementById('range');
-  // console.log(fps);
-  // timer = setTimeout(startLife, 1000 / 21); // тут вместо 25 должна быть переменная speed, но я ее не использую, тк в ней вся проблема.
-  var p = document.getElementById('p');
-  p.innerHTML = fps.value - 1;
-}
+      if (min == c2) {
+        mas2[i][j] == 3;
+      }
+      if (min == c3) {
+        mas2[i][j] == 3;
 
-function stopLife() {
-  clearTimeout(timer);
-}
-
-function resetLife() {
-  ctx.clearRect(0, 0, width, height);
-  var n = width;
-  var m = height;
-  for (var i = 0; i < n; i++) {
-    for (var j = 0; j < m; j++) {
-      mas[i][j] = 0;
-    }
-  }
-  count = 0;
-  document.getElementById('count').innerHTML = count;
-  stopLife();
-  console.log('Reset');
-}
-
-function randLife() {
-  resetLife();
-
-  for (var i = 0; i < width; i++) {
-    for (var j = 0; j < height; j++) {
-      var randInt = Math.floor(Math.random() * 2) + 0;
-      mas[i][j] = randInt;
-      if (mas[i][j] == 1) {
-        ctx.fillStyle = 'lime';
-        ctx.fillRect(j * 10, i * 10, 9.9, 9.9);
+      }
+      if (min == c4) {
+        mas2[i][j] == 3;
+        // ctx.fillStyle = 'rgb(255, 128, 0)';
+        // ctx.fillRect(i, j, 9.9, 9.9);
+      }
+      if (min == c) {
+        console.log('End.');
       }
     }
   }
-  stroke();
+  // var n = 3;
+  // var m = Math.pow(10, n);
+  // c = Math.round(c * m) / m;
+  console.log(min);
+  mas = mas2;
+  drawField();
+  // reset()
 }
+// function reset() {
+//   count++;
+//   document.getElementById('count').innerHTML = count;
+//   var speed = range.value;
+//   var fps = document.getElementById('range');
+//   // console.log(fps);
+//   // timer = setTimeout(startLife, 1000 / 21); // тут вместо 25 должна быть переменная speed, но я ее не использую, тк в ней вся проблема.
+//   var p = document.getElementById('p');
+//   p.innerHTML = fps.value - 1;
+// }
+//
+// function stopLife() {
+//   clearTimeout(timer);
+// }
+//
+// function resetLife() {
+//   ctx.clearRect(0, 0, width, height);
+//   var n = width;
+//   var m = height;
+//   for (var i = 0; i < n; i++) {
+//     for (var j = 0; j < m; j++) {
+//       mas[i][j] = 0;
+//     }
+//   }
+//   count = 0;
+//   document.getElementById('count').innerHTML = count;
+//   stopLife();
+//   console.log('Reset');
+// }
+//
+// function randLife() {
+//   resetLife();
+//
+//   for (var i = 0; i < width; i++) {
+//     for (var j = 0; j < height; j++) {
+//       var randInt = Math.floor(Math.random() * 2) + 0;
+//       mas[i][j] = randInt;
+//       if (mas[i][j] == 1) {
+//         ctx.fillStyle = 'lime';
+//         ctx.fillRect(j * 10, i * 10, 9.9, 9.9);
+//       }
+//     }
+//   }
+//   stroke();
+// }
 
 function fpm(i) {
   if (i == 0) return width;
@@ -222,6 +237,6 @@ function fpp(i) {
   else return i;
 }
 document.getElementById('start').onclick = startLife;
-document.getElementById('stop').onclick = stopLife;
-document.getElementById('res').onclick = resetLife;
-document.getElementById('rand').onclick = randLife;
+// document.getElementById('stop').onclick = stopLife;
+// document.getElementById('res').onclick = resetLife;
+// document.getElementById('rand').onclick = randLife;
