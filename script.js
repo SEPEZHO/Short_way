@@ -62,6 +62,9 @@ function drawField() {
       } else if (mas[i][j] == 3) {
         ctx.fillStyle = 'rgb(255, 128, 0)';
         ctx.fillRect(j * 10, i * 10, 9.9, 9.9);
+      } else if (mas[i][j] == 4) {
+        ctx.fillStyle = 'red';
+        ctx.fillRect(j * 10, i * 10, 9.9, 9.9);
       }
     }
   }
@@ -69,7 +72,7 @@ function drawField() {
 
 function startLife() {
   var mas2 = [];
-  for (var i = 0; i < width / 10; i++) {
+  outer: for (var i = 0; i < width / 10; i++) {
     mas2[i] = [];
     for (var j = 0; j < height / 10; j++) {
       if (mas[i][j] == 2) {
@@ -114,39 +117,50 @@ function startLife() {
         var c4 = Math.sqrt(aa3 * aa3 + bb3 * bb3);
       }
       var min = Math.min(c, c1, c2, c3, c4);
+      // if(mas[i][j] == 3) mas[i][j] = mas2[i][j];
       if (mas[i][j] == 3) {
-        if (min == c1) {
-
-          mas2[i][j + 1] = 3;
-          console.log('c1');
-        } else if (min == c2) {
-
-          mas2[i][j - 1] = 3;
-          console.log('c2');
-        } else if (min == c3) {
-
-          console.log('c3');
-          mas2[i - 1][j] = 3;
-        } else if (min == c4) {
-
-          console.log('c4');
-          mas2[i+1][j] = 3;
-        } else if (min == c) {
-
-          console.log('End.');
+        for (var i1 = i; i1 < width ; i1++) {
+            mas[i1] = 4;
         }
+      }
+      if (min == c1) {
+
+        mas[i][j + 1] = 4;
+        // console.log(mas);
+        console.log(i, j);
+        console.log('c1');
+        break outer;
+      } else if (min == c2) {
+
+        mas[i][j - 1] = 4;
+        console.log('c2');
+        break outer;
+      } else if (min == c3) {
+
+        console.log('c3');
+        mas[i - 1][j] = 4;
+        break outer;
+      } else if (min == c4) {
+
+        console.log('c4');
+        mas[i + 1][j] = 4;
+        break outer;
+      } else if (min == c) {
+        console.log('End.');
+        break outer;
+
       }
     }
   }
-  console.log(mas2 + '= mas2');
+  // mas = mas2;
+  console.log(mas + '= mas2');
   console.log(c1 + '= c1 (rigth)');
   console.log(c2 + '= c2 (left)');
   console.log(c3 + '= c3 (up)');
-  console.log(c4+ '= c4 (Bottom)');
+  console.log(c4 + '= c4 (Bottom)');
   console.log(min);
   if (min == c3) console.log(' min is c3');
   if (min == c4) console.log(' min is c4');
-  mas = mas2;
   drawField();
   // timer = setTimeout(startLife, 100);
 }
