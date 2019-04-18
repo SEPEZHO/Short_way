@@ -30,7 +30,7 @@ canvas.onclick = function ibolit(event) {
     xxx3 = x;
     yyy3 = y;
   } else {
-    mas[y][x] = 1;
+    mas[y][x] = 4;
     xxx = x;
     yyy = y;
   }
@@ -105,28 +105,28 @@ function startLife() {
       var a = x2 - x3;
       var b = y2 - y3;
       var c = Math.sqrt(a * a + b * b);
-      if (mas[fpm(i) - 1][j] != 1) { // rigth
+      if (mas[fpm(i) - 1][j] != 4) { // rigth
         var xx = xxx2 - 1;
         var yy = yyy2;
         var aa = xx - x3;
         var bb = yy - y3;
         var c1 = Math.sqrt(aa * aa + bb * bb);
       }
-      if (mas[fpp(i) + 1][j] != 1) { //left
+      if (mas[fpp(i) + 1][j] != 4) { //left
         var xx1 = xxx2 + 1;
         var yy1 = yyy2;
         var aa1 = xx1 - x3;
         var bb1 = yy1 - y3;
         var c2 = Math.sqrt(aa1 * aa1 + bb1 * bb1);
       }
-      if (mas[i][fpp(j) + 1] != 1) { // up
+      if (mas[i][fpp(j) + 1] != 4) { // up
         var xx2 = xxx2;
         var yy2 = yyy2 + 1;
         var aa2 = xx2 - x3;
         var bb2 = yy2 - y3;
         var c3 = Math.sqrt(aa2 * aa2 + bb2 * bb2);
       }
-      if (mas[i][fpm(j) - 1] != 1) { // bottom
+      if (mas[i][fpm(j) - 1] != 4) { // bottom
         var xx3 = xxx2;
         var yy3 = yyy2 - 1;
         var aa3 = xx3 - x3;
