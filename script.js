@@ -179,7 +179,7 @@ function startLife() {
   // mas[ii][jj] = 1;
   drawField();
 
-  timer = setTimeout(startLife, 500);
+  timer = setTimeout(startLife, 5);
 }
 
 function fpm(i) {
