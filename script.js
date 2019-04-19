@@ -63,8 +63,12 @@ function drawField() {
 }
 
 function goSearch() {
-  outer: for (var i = 0; i < width / 10; i++) {
-    for (var j = 0; j < height / 10; j++) {
+  var c1;
+  var c2;
+  var c3;
+  var c4
+  outer: for (var i = 1; i < width / 10; i++) {
+    for (var j = 1; j < height / 10; j++) {
 
       if (mas[i][j] == 2) {
         var x2 = xxx2;
@@ -83,36 +87,53 @@ function goSearch() {
       var c = Math.sqrt(a * a + b * b);
       var min = Math.min(c, c1, c2, c3, c4);
 
-      if (mas[fpm(i) - 1][j] != 4) { // rigth
+      if (mas[i - 1][j] != 0) { // rigth
         var xx = xxx2 - 1;
         var yy = yyy2;
         var aa = xx - x3;
         var bb = yy - y3;
-        var c1 = Math.sqrt(aa * aa + bb * bb);
+        c1 = Math.sqrt(aa * aa + bb * bb);
+        console.log(mas[i-1][j]+' =rigth');
+      } else {
+        c1 = 100;
+        console.log(mas[i-1][j]+' =rigth');
       }
 
-      if (mas[fpp(i) + 1][j] != 4) { //left
+      if (mas[i + 1][j] != 0) { //left
         var xx1 = xxx2 + 1;
         var yy1 = yyy2;
         var aa1 = xx1 - x3;
         var bb1 = yy1 - y3;
-        var c2 = Math.sqrt(aa1 * aa1 + bb1 * bb1);
+        c2 = Math.sqrt(aa1 * aa1 + bb1 * bb1);
+        console.log(mas[i+1][j]+' =left');
+      } else {
+        c2 = 100;
+        console.log(mas[i+1][j]+' =left');
       }
 
-      if (mas[i][fpp(j) + 1] != 4) { // up
+      if (mas[i][j + 1] != 0) { // up
         var xx2 = xxx2;
         var yy2 = yyy2 + 1;
         var aa2 = xx2 - x3;
         var bb2 = yy2 - y3;
-        var c3 = Math.sqrt(aa2 * aa2 + bb2 * bb2);
+        c3 = Math.sqrt(aa2 * aa2 + bb2 * bb2);
+        console.log(mas[i][j+1]+' =up');
+      } else {
+        c3 = 100;
+        console.log(mas[i][j+1]+' =up');
       }
 
-      if (mas[i][fpm(j) - 1] != 4) { // bottom
+      if (mas[i][j - 1] != 0) { // bottom
         var xx3 = xxx2;
         var yy3 = yyy2 - 1;
         var aa3 = xx3 - x3;
         var bb3 = yy3 - y3;
-        var c4 = Math.sqrt(aa3 * aa3 + bb3 * bb3);
+        c4 = Math.sqrt(aa3 * aa3 + bb3 * bb3);
+        console.log(mas[i][j-1]+' =bottom');
+      } else {
+        c4 = 100;
+        console.log(mas[i][j-1]+' =bottom');
+
       }
     }
   }
@@ -120,19 +141,15 @@ function goSearch() {
   if (min == c1) {
     mas[ii][jj + 1] = 3;
     xxx3++;
-    console.log('c1');
   } else if (min == c2) {
     mas[ii][jj - 1] = 3;
     xxx3--;
-    console.log('c2');
   } else if (min == c3) {
     mas[ii - 1][jj] = 3;
     yyy3--;
-    console.log('c3');
   } else if (min == c4) {
     mas[ii + 1][jj] = 3;
     yyy3++;
-    console.log('c4');
   }
 
   console.log(c1 + '= c1 (rigth)');
@@ -160,99 +177,20 @@ function fpp(i) {
   else return i;
 }
 
-document.onkeypress=function(event){
-  console.log(event);
-  if(event.keyCode == 13){
+document.onkeypress = function (event) {
+  if (event.keyCode == 13) {
     goSearch();
     console.log('Hello World!');
   }
 }
-// function begin(event) {
-//
-//    switch(event.keyCode){
-//   case 13:
-//     goSearch();
-//     console.log('Hello World!');
-// break;
-// }
-//   }
-
-// function coordinati(event){
-//   var x = ctx.GetLeft(canvas);
-//   var y = ctx.GetTop(canvas);
-//   console.log(x+ 'asa');
-//   console.log(y+'asasasa');
-//   x = Math.floor(x / 10);
-//   y = Math.floor(y / 10);
-//   xxx3 = x;
-//   yyy3 = y;
-// }
-// coordinati();
-
-//  if(mas[i][j] == 3) mas[i][j] = mas2[i][j];
-// if (mas[i][j] == 3) {
-//   for (var i1 = i; i1 < width; i1++) {
-//     for (var j1 = 0; j1 < height; j1++) {
-//       if (mas[i1][j1] == 2) mas[i1][j1] = 1;
-//     }
-//   }
-// }
-// function reset() {
-//   count++;
-//   p.innerHTML = fps.value - 1;
-// }
-// function stopLife() {
-//   clearTimeout(timer);
-// }
-// function stroke() {
-//   for (var x = 0.5; x <= width; x += 10) {
-//     ctx.moveTo(x, 0);
-//     ctx.lineTo(x, width);
-//   }
-//   for (var y = 0.5; y <= width; y += 10) {
-//     ctx.moveTo(0, y);
-//     ctx.lineTo(width, y);
-//   }
-//   ctx.strokeStyle = 'black';
-//   ctx.stroke();
-// }
-// document.getElementById('count').innerHTML = count;
-// var speed = range.value;
-// var fps = document.getElementById('range');
-// console.log(fps);
-// var p = document.getElementById('p');
-//
-// function resetLife() {
-//   ctx.clearRect(0, 0, width, height);
-//   var n = width;
-//   var m = height;
-//   for (var i = 0; i < n; i++) {
-//     for (var j = 0; j < m; j++) {
-//       mas[i][j] = 0;
-//     }
-//   }
-//   count = 0;
-//   document.getElementById('count').innerHTML = count;
-//   stopLife();
-//   console.log('Reset');
-// }
-//
-// function randLife() {
-//   resetLife();
-//
-//   for (var i = 0; i < width; i++) {
-//     for (var j = 0; j < height; j++) {
-//       var randInt = Math.floor(Math.random() * 2) + 0;
-//       mas[i][j] = randInt;
-//       if (mas[i][j] == 1) {
-//         ctx.fillStyle = 'lime';
-//         ctx.fillRect(j * 10, i * 10, 9.9, 9.9);
+// document.onkeypress=function(event){
+//   if(event.shiftKey){
+//     for (var i = 0; i < width; i++) {
+//       for (var j = 0; j < height; j++) {
+//         if (mas[i-1][j] == 3){
+//           console.log(mas, mas[i-1][j]);
+//         }
 //       }
 //     }
 //   }
-//   stroke();
 // }
-
-// document.getElementById('stop').onclick = stopLife;
-// document.getElementById('res').onclick = resetLife;
-// document.getElementById('rand').onclick = randLife;
