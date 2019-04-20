@@ -76,7 +76,6 @@ function goSearch() {
       }
 
       if (mas[i][j] == 3) {
-        mas[i][j] = 1;
         var x3 = xxx3;
         var y3 = yyy3;
         ii = i;
@@ -116,20 +115,19 @@ function goSearch() {
 
     }
   }
-  if (mas[ii][jj+1] !=0) { // rigth
+  if (mas[ii][jj+1] ==4 || mas[ii][jj+1] ==1 ) { // rigth
     c1 = 100;
     // console.log(mas[i-1][j]+' =rigth1');
   }
-
-  if (mas[ii][jj-1] !=0) { //left
+  if (mas[ii][jj-1] ==4 || mas[ii][jj-1] ==1 ) { //left
     c2 = 100;
     // console.log(mas[i+1][j]+' =left1');
   }
-  if (mas[ii-1][jj] !=0) { // up
+  if (mas[ii-1][jj] ==4 || mas[ii-1][jj] ==1 ) { // up
     c3 = 100;
     // console.log(mas[i][j+1]+' =up1');
   }
-  if (mas[ii+1][jj] !=0) { // bottom
+  if (mas[ii+1][jj] ==4 || mas[ii+1][jj] ==1 ) { // bottom
     c4 = 100;
     // console.log(mas[i][j-1]+' =bottom1');
   }
@@ -142,6 +140,7 @@ function goSearch() {
   //     }
   //   }
   // }
+  if(c1 == c3||c2==c4 )
   var min = Math.min(c, c1, c2, c3, c4);
    console.log(c1, c2, c3, c4);
 
@@ -166,6 +165,7 @@ function goSearch() {
     console.log('c4');
     yyy3++;
   }
+  mas[ii][jj] = 1;
 
   console.log(c1 + '= c1 (rigth)');
   console.log(c2 + '= c2 (left)');
