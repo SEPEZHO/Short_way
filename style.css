@@ -1,6 +1,3 @@
-/* #canvas{
-  border: 4px solid black;
-} */
 * {
   margin: 0px;
   padding: 0px;
@@ -13,17 +10,9 @@
   z-index: 0;
 }
 
-/* #c2 {
-  position: relative;
-  width: 1200px;
-  height: 720px;
-  top: -724px;
-  background: none;
-  z-index: 1;
-} */
 body {
   background: white;
-  color: white;
+  color: black;
   margin: 40px;
 }
 
@@ -38,9 +27,11 @@ body {
 }
 
 #menu {
+  border: 0.5px solid black;
+  padding: 10px;
   position: relative;
   left: 50%;
   top: 0;
   transform: translate(-50%);
-  text-align: center;
+  text-align: left;
 }
