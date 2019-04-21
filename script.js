@@ -118,16 +118,16 @@ function goSearch() {
       c4 = Math.sqrt(aa3 * aa3 + bb3 * bb3);
     }
   }
-  if (mas[ii][jj + 1] == 4 || mas[ii][jj + 1] == 1) { // rigth
+  if (mas[ii][jj + 1] == 4 || mas[ii][jj + 1] == 1 || mas[ii][jj + 1] !== mas[ii][jj + 1]) { // rigth
     c1 = 100;
   }
-  if (mas[ii][jj - 1] == 4 || mas[ii][jj - 1] == 1) { //left
+  if (mas[ii][jj - 1] == 4 || mas[ii][jj - 1] == 1 || mas[ii][jj - 1] !== mas[ii][jj - 1]) { //left
     c2 = 100;
   }
-  if (mas[ii - 1][jj] == 4 || mas[ii - 1][jj] == 1) { // up
+  if (mas[ii - 1][jj] == 4 || mas[ii - 1][jj] == 1 || mas[ii - 1][jj] !== mas[ii - 1][jj]) { // up
     c3 = 100;
   }
-  if (mas[ii + 1][jj] == 4 || mas[ii + 1][jj] == 1) { // bottom
+  if (mas[ii + 1][jj] == 4 || mas[ii + 1][jj] == 1 || mas[ii + 1][jj] !== mas[ii + 1][jj]) { // bottom
     c4 = 100;
   }
 
@@ -151,8 +151,9 @@ function goSearch() {
       c4 = c4 - 1;
     }
   }
-  var min = Math.min(c, c1, c2, c3, c4);
+  var min = Math.min(c1, c2, c3, c4);
 
+  var minOld = min;
   if (min == c1) {
     mas[ii][jj + 1] = 3;
     xxx3++;
