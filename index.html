@@ -1,16 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html lang="en-US">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Игра жизнь</title>
   <link rel="stylesheet" href="style.css">
-   <script src="http://code.jquery.com/jquery-3.4.0.js"></script>
-  <script type="text/javascript" src='script.js' defer>
-  </script>
-  <title>My game</title>
+  <script src="script.js" defer></script>
 </head>
-<body onload="begin()">
-  <canvas id="canvas" width="500" height="500"></canvas>
+
+<body>
+  <div id='main'>
+    <canvas id="c1" width="300" height="300"></canvas>
+
+    <div id='menu'>
+      Menu:<br></br>
+      shift+click = startRect;<br>
+      ctrl+ click = finishRect;<br>
+      click = let;<br>
+      alt+click = clearRect;<br>
+      enter = begin;<br>
+    </div>
+  </div>
 </body>
+
 </html>
